@@ -79,7 +79,7 @@ Sending method
 --------------
 
 ```python
-# default behavior: synchronic send email after creation as send_mail()
+# default behavior: send email after creation like send_mail()
 MAILQUEUE_SEND_METHOD = 'now'
 
 # send email after creation with celery task 
