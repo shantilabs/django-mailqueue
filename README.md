@@ -16,15 +16,17 @@ INSTALLED_APPS = (
 Features
 ========
 
-Templates for email (hello.txt):
+Templates for email:
 ```
+=== hello.txt ===
 {% extends "email.txt" %} 
 {% block subject %}Subject{% endblock %}
 {% block body %}
-Hello, {{ customer.name }}!
+    Hello, {{ customer.name }}!
 {% endblock %}
 ```
 
+Usage:
 ```python
 import mailqueue
 
