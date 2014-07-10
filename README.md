@@ -3,7 +3,16 @@ Install:
 pip install -e git://github.com/shantilabs/django-mailqueue.git#egg=mailqueue
 ```
 
-Settings:
+Base settings:
+```python
+
+INSTALLED_APPS = (
+    # ...
+    'mailqueue',
+)
+```
+
+Optional settings:
 ```python
 
 # different settings
