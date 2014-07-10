@@ -43,7 +43,6 @@ class MailerMessage(models.Model):
         editable=False,
         blank=True,
         null=True,
-        default=settings.MAILQUEUE_EMAIL_HOST_USER,
     )
     to_email = models.EmailField(
         editable=False,
@@ -72,7 +71,7 @@ class MailerMessage(models.Model):
             headers.update({
                 'From': conf.MAILQUEUE_FROM.format(
                     from_email=from_email,
-                    email_host_user=settings.MAILQUEUE_EMAIL_HOST_USER,
+                    email_host_user=connection_settings['username'],
                 ),
                 'Reply-To': self.from_email,
                 'Return-Path': self.from_email,
@@ -86,7 +85,7 @@ class MailerMessage(models.Model):
         msg = EmailMultiAlternatives(
             subject=self.subject,
             body=self.message,
-            from_email=settings.MAILQUEUE_EMAIL_HOST_USER,
+            from_email=None,
             to=[to_email],
             headers=headers,
             connection=connection,
