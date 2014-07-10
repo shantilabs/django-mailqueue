@@ -7,12 +7,23 @@ from django.utils import timezone
 
 from mailqueue import conf
 from mailqueue.models import MailerMessage
+from mailqueue.utils import render_letter
 
 
 logger = logging.getLogger('mailqueue')
 
 
-def add(
+def add_templated_mail(
+    to_email,
+    template,
+    context=None,
+    **kwargs
+):
+    subj, body = render_letter(template, context)
+    return add_mail(subj, body, to_email, **kwargs)
+
+
+def add_mail(
     subj,
     body,
     to_email,
@@ -20,7 +31,6 @@ def add(
     html_body='',
     start_datetime=None,
     send_now=False,
-    # attach=None,
 ):
     """
     Base letter.
