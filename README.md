@@ -18,7 +18,7 @@ Features
 
 Templates for email:
 ```
-=== hello.txt ===
+=== letters/hello.txt ===
 {% extends "email.txt" %} 
 {% block subject %}Subject{% endblock %}
 {% block body %}
