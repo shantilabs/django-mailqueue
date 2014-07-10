@@ -1,0 +1,9 @@
+{% extends "email.txt" %}
+
+{% block subject %}subject
+here{% endblock %}
+
+{% block body %}
+    body
+    here
+{% endblock %}

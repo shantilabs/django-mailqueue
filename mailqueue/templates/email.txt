@@ -1,0 +1,1 @@
+{% block subject %}{% endblock %}{{ subject_body_splitter }}{% block body %}{% endblock %}
