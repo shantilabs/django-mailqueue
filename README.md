@@ -16,29 +16,6 @@ INSTALLED_APPS = (
 Features
 ========
 
-Django templates for letters
-----------------------------
-```
-=== letters/hello.txt ===
-{% extends "email.txt" %} 
-
-{% block subject %}Subject{% endblock %}
-
-{% block body %}
-    Hello, {{ customer.name }}!
-{% endblock %}
-```
-
-Usage:
-```python
-import mailqueue
-
-# email from django templates
-mailqueue.add_templated_mail(customer.email, 'letters/hello.txt', {
-    'customer': customer,
-})
-```
-
 Letters queue for asynchronous sending
 --------------------------------------
 
@@ -72,6 +49,29 @@ Mail archive
 
 `mailqueue.models.MailerMessage`
 
+
+Django templates for letters
+----------------------------
+```
+=== letters/hello.txt ===
+{% extends "email.txt" %} 
+
+{% block subject %}Subject{% endblock %}
+
+{% block body %}
+    Hello, {{ customer.name }}!
+{% endblock %}
+```
+
+Usage:
+```python
+import mailqueue
+
+# email from django templates
+mailqueue.add_templated_mail(customer.email, 'letters/hello.txt', {
+    'customer': customer,
+})
+```
 
 Tuning
 ======
