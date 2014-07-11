@@ -1,15 +1,18 @@
-from celery import Celery
+import logging
+from celery import shared_task
 from mailqueue import process, clean
 
 
-app = Celery()
+logger = logging.getLogger('mailqueue')
 
 
-@app.task(name='mailqueue.process')
+@shared_task(name='mailqueue.process')
 def process_mailqueue():
+    logging.info('start celery task "mailqueue.process"')
     process()
 
 
-@app.task(name='mailqueue.clean')
+@shared_task(name='mailqueue.clean')
 def clean_mailqueue():
+    logging.info('start celery task "mailqueue.clean"')
     clean()
