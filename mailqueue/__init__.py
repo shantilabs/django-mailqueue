@@ -36,36 +36,35 @@ def add_mail(
     Base letter.
     """
     logger.info(u'add letter to %s with subject = %r', to_email, subj)
-    assert isinstance(to_email, basestring)
 
     if send_now or not start_datetime:
         start_datetime = timezone.now()
 
-    obj = MailerMessage.objects.create(
-        subject=subj,
-        message=body,
-        html_message=html_body,
-        from_email=from_email,
-        to_email=to_email,
-        start_datetime=start_datetime,
-    )
+    if isinstance(to_email, basestring):
+        to_email = [to_email]
 
-    # if attach:
-    #     assert isinstance(attach, ContentFile)
-    #     obj.attach.save(attach.name, attach)
+    for t in to_email:
+        obj = MailerMessage.objects.create(
+            subject=subj,
+            message=body,
+            html_message=html_body,
+            from_email=from_email,
+            to_email=t,
+            start_datetime=start_datetime,
+        )
 
-    if send_now or (
-        conf.MAILQUEUE_SEND_METHOD == 'now' and
-        obj.start_datetime <= timezone.now()
-    ):
-        logger.info(u'send letter #%d now', obj.id)
-        obj.send()
-    elif conf.MAILQUEUE_SEND_METHOD == 'celery':
-        logger.info(u'send letter #%d via celery', obj.id)
-        from mailqueue.tasks import process_mailqueue
-        process_mailqueue.delay()
-    else:
-        logger.info(u'send letter #%d later', obj.id)
+        if send_now or (
+            conf.MAILQUEUE_SEND_METHOD == 'now' and
+            obj.start_datetime <= timezone.now()
+        ):
+            logger.info(u'send letter #%d now', obj.id)
+            obj.send()
+        elif conf.MAILQUEUE_SEND_METHOD == 'celery':
+            logger.info(u'send letter #%d via celery', obj.id)
+            from mailqueue.tasks import process_mailqueue
+            process_mailqueue.delay()
+        else:
+            logger.info(u'send letter #%d later', obj.id)
 
 
 def add_glued(
