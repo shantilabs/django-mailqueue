@@ -7,6 +7,9 @@ setup(
     author='Maxim Oransky',
     author_email='maxim.oransky@gmail.com',
     url='https://github.com/shantilabs/django-mailqueue',
+    packages=[
+        'mailqueue',
+    ],
     package_data={
         'mailqueue': ['templates/*'],
     },
