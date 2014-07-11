@@ -39,12 +39,16 @@ mailqueue.add_templated_mail(customer.email, 'letters/hello.txt', {
 })
 ```
 
-Letters queue for asynchronous sending and mail archive
--------------------------------------------------------
+Letters queue for asynchronous sending
+--------------------------------------
 
 Cases:
 
 ```python
+from datetime import timedelta 
+from django.utils import timezone
+import mailqueue
+
 # simple email
 mailqueue.add_mail('subject', 'message', 'email@example.com')
 
@@ -53,9 +57,6 @@ mailqueue.add_mail('subject', 'message', 'email@example.com',
                    send_now=True)
 
 # send after 3 days
-from datetime import timedelta 
-from django.utils import timezone
-
 start_datetime = timezone.now() + timedelta(days=3)
 mailqueue.add_mail('subject', 'delayed message', 'email@example.com', 
                    start_datetime=start_datetime)
@@ -65,6 +66,11 @@ mailqueue.add_mail('New question', question, manager.email,
                    from_email=customer.email)
 
 ```
+
+Mail archive
+------------
+
+`mailqueue.models.MailerMessage`
 
 
 Tuning
