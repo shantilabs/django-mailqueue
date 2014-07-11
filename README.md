@@ -16,11 +16,14 @@ INSTALLED_APPS = (
 Features
 ========
 
-Templates for email:
+Django templates for letters
+----------------------------
 ```
 === letters/hello.txt ===
 {% extends "email.txt" %} 
+
 {% block subject %}Subject{% endblock %}
+
 {% block body %}
     Hello, {{ customer.name }}!
 {% endblock %}
@@ -34,11 +37,18 @@ import mailqueue
 mailqueue.add_templated_mail(customer.email, 'letters/hello.txt', {
     'customer': customer,
 })
+```
 
+Letters queue for asynchronous sending and mail archive
+-------------------------------------------------------
+
+Cases:
+
+```python
 # simple email
 mailqueue.add_mail('subject', 'message', 'email@example.com')
 
-# send now
+# send now (synchronous)
 mailqueue.add_mail('subject', 'message', 'email@example.com', 
                    send_now=True)
 
@@ -50,7 +60,7 @@ start_datetime = timezone.now() + timedelta(days=3)
 mailqueue.add_mail('subject', 'delayed message', 'email@example.com', 
                    start_datetime=start_datetime)
 
-# custom "From"
+# custom "From" (for easy reply)
 mailqueue.add_mail('New question', question, manager.email, 
                    from_email=customer.email)
 
