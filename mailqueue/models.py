@@ -57,7 +57,7 @@ class MailerMessage(models.Model):
             self.create_datetime,
             self.from_email,
             self.to_email,
-            self.send_datetime,
+            self.sent_datetime,
         )
 
     def send(self, get_unsbscribe_link=None):

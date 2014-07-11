@@ -84,7 +84,7 @@ def add_glued(
             subject=subj,
             from_email=from_email,
             to_email=t,
-            send_datetime__isnull=True,
+            sent_datetime__isnull=True,
             defaults=dict(
                 message=body,
                 start_datetime=timezone.now() + datetime.timedelta(delay_hours),
@@ -103,7 +103,7 @@ def process():
     while True:
         time.sleep(conf.MAILQUEUE_PROCESSING_PAUSE_SECONDS)
         messages = MailerMessage.objects.filter(
-            send_datetime__isnull=True,
+            sent_datetime__isnull=True,
             start_datetime__lte=timezone.now(),
         )
         logger.info('%d message(s) in queue..', messages.count())
