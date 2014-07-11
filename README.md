@@ -60,18 +60,40 @@ mailqueue.add_mail('New question', question, manager.email,
 Tuning
 ======
 
-Different settings 
-  * for different recipients ("to_regex")
-  * for mailqueue's letters and standard Django send_mail() function (used in mail_admin() etc)
+Server settings
+---------------
+
+Different settings for mailqueue's letters and for standard Django send_mail() / mail_admin() functions:
 
 ```python
+EMAIL_HOST = 'myhost'
+EMAIL_HOST_USER = 'user'
+EMAIL_HOST_PASSWORD = 'password'
+
+MAILQUEUE_SERVER_SETTINGS = {
+    'host': 'another_host',
+    'username': 'another_username',
+    'password': 'another_password',
+}
+```
+
+Different settings for different recipients:
+```python
 MAILQUEUE_SERVER_SETTINGS = [{
-    #'to_regex': '^.+$',
-    #'host': EMAIL_HOST,
-    #'port': EMAIL_PORT,
-    #'username': EMAIL_HOST_USER,
-    #'password': EMAIL_HOST_PASSWORD,
-    #'use_tls' EMAIL_USE_TLS,
+    # from yandex to yandex
+    'to_regex': '^.*@yandex.ru$',
+    'host': 'smtp.yandex.ru',
+    'port': 465,
+    'username': 'username',
+    'password': '********',
+    'use_tls': True,
+}, {
+    # from gmail to other services
+    'host': 'smtp.gmail.com',
+    'port': 587,
+    'username': 'username@gmail.com',
+    'password': '********',
+    'use_tls': True,
 }]
 ```
 

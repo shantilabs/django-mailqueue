@@ -3,7 +3,9 @@ from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 
 
-MAILQUEUE_SERVER_SETTINGS = getattr(settings, 'MAILQUEUE_SERVER_SETTINGS', None) or [{}]
+MAILQUEUE_SERVER_SETTINGS = getattr(settings, 'MAILQUEUE_SERVER_SETTINGS', None) or {}
+if isinstance(MAILQUEUE_SERVER_SETTINGS, dict):
+    MAILQUEUE_SERVER_SETTINGS = [MAILQUEUE_SERVER_SETTINGS]
 
 MAILQUEUE_SEND_METHOD = getattr(settings, 'MAILQUEUE_SEND_METHOD', 'now')
 if not MAILQUEUE_SEND_METHOD in ('now', 'cron', 'celery'):

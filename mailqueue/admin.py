@@ -10,11 +10,11 @@ class MailerMessageAdmin(admin.ModelAdmin):
     )
     list_display = (
         'id',
-        'creation_datetime',
+        'create_datetime',
         'subject',
         'from_email',
         'to_email',
-        'send_datetime',
+        'sent_datetime',
     )
     readonly_fields = (
         'create_datetime',
@@ -25,7 +25,7 @@ class MailerMessageAdmin(admin.ModelAdmin):
         'from_email',
         'to_email',
         'start_datetime',
-        'attach',
+        # 'attach',
     )
     search_fields = (
         'to_email',
