@@ -67,7 +67,7 @@ class MailerMessage(models.Model):
         connection = get_connection(**connection_settings)
 
         headers = {}
-        if from_email != connection['username']:
+        if from_email != connection_settings['username']:
             headers.update({
                 'From': conf.MAILQUEUE_FROM.format(
                     from_email=from_email,
