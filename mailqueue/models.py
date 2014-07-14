@@ -30,6 +30,7 @@ class MailerMessage(models.Model):
 
     create_datetime = models.DateTimeField(
         auto_now_add=True,
+        db_index=True,
     )
     sent_datetime = models.DateTimeField(
         blank=True,
@@ -103,3 +104,6 @@ class MailerMessage(models.Model):
 
         self.sent_datetime = timezone.now()
         self.save()
+
+    class Meta:
+        ordering = ('-create_datetime',)
