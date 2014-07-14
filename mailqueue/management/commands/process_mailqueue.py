@@ -10,7 +10,7 @@ from mailqueue import process
 
 class Command(BaseCommand):
     option_list = BaseCommand.option_list + (
-        make_option('--forever', dest='forever', action='store', type='bool'),
+        make_option('--forever', dest='forever', action='store_true'),
     )
 
     def handle(self, *args, **options):

@@ -119,12 +119,11 @@ def clean():
     """
     Clean mail queue.
     """
-    logger.info('clean...')
     lifetime_days = conf.MAILQUEUE_ARCHIVE_LIFETIME_DAYS
-    logger.info('lifetime = %d day(s)', lifetime_days)
+    logger.info('clean (lifetime_days=%s)...', lifetime_days)
     if lifetime_days:
         deadline = timezone.now() - datetime.timedelta(lifetime_days)
         messages = MailerMessage.objects.filter(sent_datetime__lte=deadline)
-        logger.info('%d message(s) to delete', messages.count())
+        logger.info('%d message(s) to delete (deadline=%s)', messages.count(), deadline)
         messages.delete()
     logger.info('...clean')
