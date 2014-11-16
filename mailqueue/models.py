@@ -52,6 +52,7 @@ class MailerMessage(models.Model):
     subject = models.TextField(ugettext_lazy('subject'))
     message = models.TextField(ugettext_lazy('plain text message'))
     html_message = models.TextField(ugettext_lazy('html message'), blank=True, default='')
+    attach = models.FileField(upload_to='attach', editable=False, blank=True, null=True)
 
     def __unicode__(self):
         return u'[{0}] {1} -> {2} [{3}]'.format(
@@ -95,10 +96,10 @@ class MailerMessage(models.Model):
         if self.html_message:
             msg.attach_alternative(self.html_message, 'text/html')
 
-        # if self.attach:
-        #     assert self.attach.file.name.endswith('.xlsx'), self.attach.file.name
-        #     content_type = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-        #     msg.attach(self.attach.name, self.attach.read(), content_type)
+        if self.attach:
+            assert self.attach.file.name
+            content_type = 'application/octet-stream'
+            msg.attach(self.attach.name, self.attach.read(), content_type)
 
         msg.send()
 

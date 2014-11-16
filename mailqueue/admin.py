@@ -25,7 +25,7 @@ class MailerMessageAdmin(admin.ModelAdmin):
         'from_email',
         'to_email',
         'start_datetime',
-        # 'attach',
+        'attach',
     )
     search_fields = (
         'to_email',

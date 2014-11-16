@@ -4,6 +4,7 @@ import datetime
 
 from django.conf import settings
 from django.utils import timezone
+from django.core.files.base import ContentFile
 
 from mailqueue import conf
 from mailqueue.models import MailerMessage
@@ -31,6 +32,7 @@ def add_mail(
     html_body='',
     start_datetime=None,
     send_now=False,
+    attach=None,
 ):
     """
     Base letter.
@@ -52,6 +54,10 @@ def add_mail(
             to_email=t,
             start_datetime=start_datetime,
         )
+
+        if attach:
+            assert isinstance(attach, ContentFile)
+            obj.attach.save(attach.name, attach)
 
         if send_now or (
             conf.MAILQUEUE_SEND_METHOD == 'now' and
