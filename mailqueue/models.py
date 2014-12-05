@@ -87,7 +87,7 @@ class MailerMessage(models.Model):
         msg = EmailMultiAlternatives(
             subject=self.subject,
             body=self.message,
-            from_email=None,
+            from_email=self.from_email,
             to=[to_email],
             headers=headers,
             connection=connection,
