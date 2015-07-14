@@ -96,7 +96,7 @@ class MailerMessage(models.Model):
             to=[to_email],
             headers=headers,
             connection=connection,
-            reply_to=self.reply_to,
+            reply_to=[self.reply_to] if self.reply_to else None,
         )
 
         if self.html_message:
