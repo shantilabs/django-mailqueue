@@ -49,6 +49,11 @@ class MailerMessage(models.Model):
         editable=False,
         db_index=True,
     )
+    reply_to = models.EmailField(
+        editable=False,
+        blank=True,
+        null=True
+    )
     subject = models.TextField(ugettext_lazy('subject'))
     message = models.TextField(ugettext_lazy('plain text message'))
     html_message = models.TextField(ugettext_lazy('html message'), blank=True, default='')
@@ -91,6 +96,7 @@ class MailerMessage(models.Model):
             to=[to_email],
             headers=headers,
             connection=connection,
+            reply_to=self.reply_to,
         )
 
         if self.html_message:
