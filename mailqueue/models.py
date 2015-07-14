@@ -67,7 +67,7 @@ class MailerMessage(models.Model):
             self.sent_datetime,
         )
 
-    def send(self, get_unsbscribe_link=None):
+    def send(self, get_unsubscribe_link=None):
         to_email = clean_email(self.to_email)
         connection_settings = self.get_connection_settings(to_email)
         from_email = self.from_email or connection_settings['username']
@@ -84,9 +84,9 @@ class MailerMessage(models.Model):
                 'Return-Path': self.from_email,
             })
 
-        if get_unsbscribe_link:
+        if get_unsubscribe_link:
             headers['List-Unsubscribe'] = '<{0}>'.format(
-                get_unsbscribe_link(self.to_email),
+                get_unsubscribe_link(self.to_email),
             )
 
         msg = EmailMultiAlternatives(
