@@ -9,6 +9,7 @@ setup(
     url='https://github.com/shantilabs/django-mailqueue',
     packages=[
         'mailqueue',
+        'mailqueue.migrations',
     ],
     package_data={
         'mailqueue': ['templates/*'],
