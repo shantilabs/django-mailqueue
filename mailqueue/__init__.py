@@ -29,6 +29,7 @@ def add_mail(
     body,
     to_email,
     from_email=None,
+    reply_to=None,
     html_body='',
     start_datetime=None,
     send_now=False,
@@ -52,6 +53,7 @@ def add_mail(
             html_message=html_body,
             from_email=from_email,
             to_email=t,
+            reply_to=reply_to,
             start_datetime=start_datetime,
         )
 
