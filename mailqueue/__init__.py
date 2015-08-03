@@ -13,6 +13,7 @@ from mailqueue.utils import render_letter
 
 logger = logging.getLogger('mailqueue')
 
+default_app_config = 'mailqueue.app.MailQueueConfig'
 
 def add_templated_mail(
     to_email,
