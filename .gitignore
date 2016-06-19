@@ -2,3 +2,5 @@ coverage-html-report
 *.pyc
 *.coverage
 django_mailqueue.egg-info
+MANIFEST
+
