@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
 from django.contrib import admin
-from mailqueue.models import MailerMessage
+from .models import MailerMessage
 
 
 class MailerMessageAdmin(admin.ModelAdmin):

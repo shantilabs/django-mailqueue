@@ -1,6 +1,6 @@
 import logging
 from celery import shared_task
-from mailqueue import process, clean
+from .mailqueue import process, clean
 
 
 logger = logging.getLogger('mailqueue')

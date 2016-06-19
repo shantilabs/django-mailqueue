@@ -3,9 +3,9 @@ from django.conf import settings
 from django.core import mail
 from django.test.utils import setup_test_environment
 from django.utils import timezone
-from django.utils.unittest.case import TestCase
+from django.test import TestCase
 
-from mailqueue import add_templated_mail, MailerMessage, process, add_mail, clean, conf
+from ..mailqueue import add_templated_mail, MailerMessage, process, add_mail, clean, conf
 
 
 class TestEmail(TestCase):

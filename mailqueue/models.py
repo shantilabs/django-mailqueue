@@ -6,8 +6,8 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy
 
-from mailqueue import conf
-from mailqueue.utils import clean_email
+from . import conf
+from .utils import clean_email
 
 
 class MailerMessage(models.Model):
