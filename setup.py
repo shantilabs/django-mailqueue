@@ -10,6 +10,7 @@ setup(
     packages=[
         'mailqueue',
         'mailqueue.migrations',
+        'mailqueue.tests',
     ],
     package_data={
         'mailqueue': ['templates/*'],

@@ -35,24 +35,7 @@ def init_venv():
 
 
 def test():
-    with cd(root):
-        with _virtualenv():
-            with shell_env(DJANGO_SETTINGS_MODULE='test_django_settings'):
-                local(' '.join((
-                    'django-admin.py',
-                    'test',
-                    'mailqueue',
-                    '--pythonpath=./',
-                    # '--with-coverage',
-                    # '--with-doctest',
-                    # '--doctest-tests',
-                    # '--verbose',
-                    # '--cover-package=mailqueue',
-                    # # '--cover-html',
-                    # # '--cover-html-dir=coverage-html-report',
-                )).format(
-                    project=project,
-                ))
+    local('tox')
 
 
 def build():
