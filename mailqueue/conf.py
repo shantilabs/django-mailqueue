@@ -8,7 +8,7 @@ if isinstance(MAILQUEUE_SERVER_SETTINGS, dict):
     MAILQUEUE_SERVER_SETTINGS = [MAILQUEUE_SERVER_SETTINGS]
 
 MAILQUEUE_SEND_METHOD = getattr(settings, 'MAILQUEUE_SEND_METHOD', 'now')
-if not MAILQUEUE_SEND_METHOD in ('now', 'cron', 'celery'):
+if MAILQUEUE_SEND_METHOD not in ('now', 'cron', 'celery'):
     raise ImproperlyConfigured('Incorrect MAILQUEUE_SEND_METHOD value')
 
 MAILQUEUE_ARCHIVE_LIFETIME_DAYS = int(getattr(settings, 'MAILQUEUE_ARCHIVE_LIFETIME_DAYS', 0))

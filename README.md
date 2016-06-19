@@ -24,7 +24,7 @@ Cases:
 ```python
 from datetime import timedelta 
 from django.utils import timezone
-import mailqueue
+from mailqueue import mailqueue
 
 # simple email
 mailqueue.add_mail('subject', 'message', 'email@example.com')
@@ -65,7 +65,7 @@ Django templates for letters
 
 Usage:
 ```python
-import mailqueue
+from mailqueue import mailqueue
 
 # email from django templates
 mailqueue.add_templated_mail(customer.email, 'letters/hello.txt', {
