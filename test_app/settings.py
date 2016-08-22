@@ -3,10 +3,8 @@ SECRET_KEY = '12345'
 
 INSTALLED_APPS = (
     'mailqueue',
-    'django_nose',
 )
 
-TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 DATABASES = {
     'default': {
