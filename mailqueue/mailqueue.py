@@ -69,7 +69,7 @@ def add_mail(
             obj.send()
         elif conf.MAILQUEUE_SEND_METHOD == 'celery':
             logger.info(u'send letter #%d via celery', obj.id)
-            from mailqueue.tasks import process_mailqueue
+            from .tasks import process_mailqueue
             process_mailqueue.delay()
         else:
             logger.info(u'send letter #%d later', obj.id)
