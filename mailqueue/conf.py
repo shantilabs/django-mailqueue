@@ -14,6 +14,6 @@ if MAILQUEUE_SEND_METHOD not in ('now', 'cron', 'celery'):
 MAILQUEUE_ARCHIVE_LIFETIME_DAYS = int(getattr(settings, 'MAILQUEUE_ARCHIVE_LIFETIME_DAYS', 0))
 assert MAILQUEUE_ARCHIVE_LIFETIME_DAYS >= 0
 
-MAILQUEUE_FROM = getattr(settings, 'MAILQUEUE_FROM', u'{from_email}')
+MAILQUEUE_FROM = getattr(settings, 'MAILQUEUE_FROM', '{from_email}')
 
 MAILQUEUE_PROCESSING_PAUSE_SECONDS = getattr(settings, 'MAILQUEUE_PROCESSING_PAUSE_SECONDS', 2)
