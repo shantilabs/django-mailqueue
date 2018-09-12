@@ -1,3 +1,5 @@
+.pytest_cache
+.tox
 coverage-html-report
 *.pyc
 *.coverage

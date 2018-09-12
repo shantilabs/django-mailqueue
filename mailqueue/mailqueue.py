@@ -38,12 +38,12 @@ def add_mail(
     """
     Base letter.
     """
-    logger.info(u'add letter to %s with subject = %r', to_email, subj)
+    logger.info('add letter to %s with subject = %r', to_email, subj)
 
     if send_now or not start_datetime:
         start_datetime = timezone.now()
 
-    if isinstance(to_email, basestring):
+    if isinstance(to_email, str):
         to_email = [to_email]
 
     for t in to_email:
@@ -65,14 +65,14 @@ def add_mail(
             conf.MAILQUEUE_SEND_METHOD == 'now' and
             obj.start_datetime <= timezone.now()
         ):
-            logger.info(u'send letter #%d now', obj.id)
+            logger.info('send letter #%d now', obj.id)
             obj.send()
         elif conf.MAILQUEUE_SEND_METHOD == 'celery':
-            logger.info(u'send letter #%d via celery', obj.id)
+            logger.info('send letter #%d via celery', obj.id)
             from .tasks import process_mailqueue
             process_mailqueue.delay()
         else:
-            logger.info(u'send letter #%d later', obj.id)
+            logger.info('send letter #%d later', obj.id)
 
 
 def add_glued(
@@ -85,7 +85,7 @@ def add_glued(
     """
     Autoconcatenated debug letters.
     """
-    if isinstance(to_email, basestring):
+    if isinstance(to_email, str):
         to_email = [to_email]
     for t in to_email:
         obj, created = MailerMessage.objects.get_or_create(

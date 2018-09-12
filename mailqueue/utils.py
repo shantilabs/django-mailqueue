@@ -42,7 +42,7 @@ def render_letter(template, context=None):
         subject_body_splitter=splitter,
     ))
     bits = content.split(splitter)
-    assert len(bits) == 2, u'Incorrect mail tempate: {}'.format(template)
+    assert len(bits) == 2, 'Incorrect mail tempate: {}'.format(template)
     subject = clean_subject(bits[0])
     body = bits[1].strip()
     return subject, body
